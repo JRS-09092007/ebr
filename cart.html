@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | BAGORA Store</title>
+  <meta name="description" content="View and manage items in your BAGORA shopping cart. Update quantities, apply promo codes, and proceed to checkout.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-banner">
+    🎒 <span>Special Offer:</span> Enjoy <span>Free Express Shipping</span> on orders over ₹1,999! Use coupon <span>BAGORA10</span> for 10% off.
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-icon">👜</span>
+        <span>BAGORA</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="shop.html?category=Handbags">Handbags</a></li>
+          <li><a href="shop.html?category=Backpacks">Backpacks</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="cart.html" class="cart-icon-btn active" title="View Shopping Cart">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-badge">0</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <section style="background:var(--bg-subtle); padding: 3rem 0 2rem; border-bottom:1px solid var(--border-color);">
+    <div class="container" style="text-align:center;">
+      <h1 style="font-size:2.5rem; margin-bottom:0.5rem;">Your Shopping Cart</h1>
+      <p style="color:var(--text-muted); font-size:1.05rem;">Review your items before proceeding to checkout.</p>
+    </div>
+  </section>
+
+  <!-- Cart Content Area -->
+  <main class="container">
+    <div id="cart-view-container">
+      <!-- Dynamically filled by JS (Cart layout or Empty view) -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="color:#FFFFFF;">
+            <span class="logo-icon" style="background:var(--accent-color);">👜</span>
+            <span>BAGORA</span>
+          </a>
+          <p>BAGORA delivers premium bags and everyday accessories designed for style, utility, and everyday modern living.</p>
+          <div style="font-size:0.85rem; color:#A8A29E;">Crafted with passion for everyday elegance.</div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Shop Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=Handbags">Handbags</a></li>
+            <li><a href="shop.html?category=Backpacks">Backpacks</a></li>
+            <li><a href="shop.html?category=Laptop Bags">Laptop Bags</a></li>
+            <li><a href="shop.html?category=Travel Bags">Travel Bags</a></li>
+            <li><a href="shop.html?category=Wallets">Wallets & Small Leather</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="cart.html">View Cart</a></li>
+            <li><a href="checkout.html">Checkout & Payment</a></li>
+            <li><a href="about.html">About BAGORA</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Business Details</h4>
+          <p style="font-size:0.9rem; color:#A8A29E; line-height:1.6;">
+            📍 Pune, Maharashtra, India<br>
+            ✉️ support@bagora.com<br>
+            📞 +91 98765 43210
+          </p>
+          <div style="margin-top:1rem; font-size:0.8rem; color:#10B981; font-weight:600;">
+            🔒 Secure 256-Bit SSL Encrypted Checkout
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 BAGORA Store. All rights reserved.</div>
+        <div>Tagline: <em>"Carry Your Style."</em></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderCartPage() {
+      const container = document.getElementById('cart-view-container');
+      const cart = getCart();
+      const totals = getCartTotals();
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart-view">
+            <div class="empty-cart-icon">🛒</div>
+            <h2>Your cart is currently empty</h2>
+            <p style="color:var(--text-muted); margin: 0.75rem 0 2rem;">Looks like you haven't added any bags or accessories to your cart yet.</p>
+            <a href="shop.html" class="btn btn-accent btn-lg">Explore Shop Collection →</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="cart-layout">
+          <div>
+            <div class="cart-table-wrapper">
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${cart.map(item => `
+                    <tr>
+                      <td>
+                        <div class="cart-item-info">
+                          <div class="cart-item-img">
+                            <img src="${item.image}" alt="${item.name}" />
+                          </div>
+                          <div>
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-meta">${item.category} • ID: ${item.id}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td style="font-weight:600;">${formatINR(item.price)}</td>
+                      <td>
+                        <div class="quantity-picker" style="margin-bottom:0;">
+                          <button class="qty-btn" onclick="handleCartQtyChange('${item.id}', ${item.quantity - 1})">-</button>
+                          <input type="text" class="qty-input" value="${item.quantity}" readonly />
+                          <button class="qty-btn" onclick="handleCartQtyChange('${item.id}', ${item.quantity + 1})">+</button>
+                        </div>
+                      </td>
+                      <td style="font-weight:700; font-family:var(--font-heading); color:var(--text-main);">
+                        ${formatINR(item.price * item.quantity)}
+                      </td>
+                      <td>
+                        <button class="cart-remove-btn" title="Remove Item" onclick="handleCartRemove('${item.id}', '${item.name}')">
+                          ✕
+                        </button>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem;">
+              <a href="shop.html" class="btn btn-outline">← Continue Shopping</a>
+              <button class="btn btn-outline" style="color:#EF4444; border-color:#FCA5A5;" onclick="handleClearAllCart()">
+                Clear Shopping Cart
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="cart-summary-card">
+              <h3>Order Summary</h3>
+              
+              <div class="summary-row">
+                <span>Items Subtotal (${totals.itemCount} items)</span>
+                <span>${formatINR(totals.subtotal)}</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Shipping Fee</span>
+                <span>${totals.shipping === 0 ? '<span style="color:#059669; font-weight:600;">FREE</span>' : formatINR(totals.shipping)}</span>
+              </div>
+
+              ${totals.shipping > 0 ? `
+                <div style="font-size:0.8rem; color:var(--accent-color); margin-bottom:1rem; background:var(--accent-light); padding:0.5rem 0.75rem; border-radius:6px;">
+                  💡 Add ${formatINR(1999 - totals.subtotal)} more to get FREE Delivery!
+                </div>
+              ` : ''}
+
+              ${totals.discount > 0 ? `
+                <div class="summary-row" style="color:#059669; font-weight:600;">
+                  <span>Promo Discount (${totals.coupon})</span>
+                  <span>-${formatINR(totals.discount)}</span>
+                </div>
+              ` : ''}
+
+              <div class="promo-input-group">
+                <input type="text" id="promo-code-input" placeholder="Coupon Code (BAGORA10)" value="${totals.coupon || ''}" />
+                <button class="btn btn-primary btn-sm" onclick="handleApplyPromo()">Apply</button>
+              </div>
+
+              <div class="summary-row total">
+                <span>Grand Total</span>
+                <span>${formatINR(totals.grandTotal)}</span>
+              </div>
+
+              <div style="margin-top:1.5rem;">
+                <a href="checkout.html" class="btn btn-accent btn-lg btn-full">
+                  Proceed to Checkout →
+                </a>
+              </div>
+
+              <div style="margin-top:1.25rem; font-size:0.8rem; color:var(--text-muted); text-align:center;">
+                🔒 Secure 256-Bit SSL Encrypted Checkout
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleCartQtyChange(id, newQty) {
+      updateCartQuantity(id, newQty);
+      renderCartPage();
+    }
+
+    function handleCartRemove(id, name) {
+      removeFromCart(id);
+      showToast(`Removed "${name}" from cart.`);
+      renderCartPage();
+    }
+
+    function handleClearAllCart() {
+      if (confirm('Are you sure you want to empty your cart?')) {
+        clearCart();
+        showToast('Shopping cart cleared.');
+        renderCartPage();
+      }
+    }
+
+    function handleApplyPromo() {
+      const code = document.getElementById('promo-code-input').value;
+      const res = applyCoupon(code);
+      if (res.success) {
+        showToast(res.message, 'success');
+      } else {
+        showToast(res.message, 'error');
+      }
+      renderCartPage();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCartPage();
+    });
+  </script>
+</body>
+</html>

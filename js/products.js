@@ -1,0 +1,216 @@
+// BAGORA Product Catalog Master Data
+const PRODUCTS = [
+  {
+    id: "BG-101",
+    name: "Classic Leather Handbag",
+    category: "Handbags",
+    price: 2499,
+    oldPrice: 3299,
+    rating: 4.8,
+    reviews: 142,
+    stock: "In Stock",
+    badge: "Bestseller",
+    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80",
+    description: "Handcrafted from top-grain full-grain leather with gold-tone hardware. Features a structured silhouette, double rolled top handles, and an optional adjustable shoulder strap.",
+    features: ["100% Genuine Italian Leather", "Multi-pocket organizer inside", "Water-resistant interior lining", "Dimensions: 32 x 24 x 14 cm"]
+  },
+  {
+    id: "BG-102",
+    name: "Urban Commuter Backpack",
+    category: "Backpacks",
+    price: 1499,
+    oldPrice: 1999,
+    rating: 4.7,
+    reviews: 98,
+    stock: "In Stock",
+    badge: "Popular",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    description: "Minimalist waterproof backpack engineered for daily tech commuters. Padded sleeve protects up to 15.6-inch laptops with dedicated tablet and powerbank pockets.",
+    features: ["Waterproof oxford fabric", "Dedicated 15.6\" Laptop sleeve", "Hidden anti-theft back pocket", "Ergonomic breathable mesh padding"]
+  },
+  {
+    id: "BG-103",
+    name: "Premium Weekender Duffel",
+    category: "Travel Bags",
+    price: 1999,
+    oldPrice: 2699,
+    rating: 4.9,
+    reviews: 76,
+    stock: "In Stock",
+    badge: "Must Have",
+    image: "https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80",
+    description: "The ultimate short-trip companion built from heavy-duty canvas and genuine leather trim. Includes an isolated side shoe compartment and luggage trolley strap.",
+    features: ["45-Liter capacity", "Isolated ventilated shoe compartment", "Trolley sleeve for airport luggage", "Heavy-duty brass zippers"]
+  },
+  {
+    id: "BG-104",
+    name: "Minimal Crossbody Sling",
+    category: "Sling Bags",
+    price: 999,
+    oldPrice: 1399,
+    rating: 4.5,
+    reviews: 64,
+    stock: "In Stock",
+    badge: "Trending",
+    image: "https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?auto=format&fit=crop&w=800&q=80",
+    description: "Compact hands-free shoulder sling designed for smartphone, keys, sunglasses, and daily essentials. Lightweight nylon construction with quick-release buckle.",
+    features: ["Scratch-resistant ripstop nylon", "Magnetic front quick-access pocket", "Adjustable dual-side strap", "Earphone keyhole grommet"]
+  },
+  {
+    id: "BG-105",
+    name: "Everyday Canvas Tote Bag",
+    category: "Handbags",
+    price: 799,
+    oldPrice: 1199,
+    rating: 4.6,
+    reviews: 115,
+    stock: "In Stock",
+    badge: "Eco-Friendly",
+    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+    description: "Spacious heavy-cotton canvas tote bag featuring reinforced stitching, interior zippered pouch, and a clean eco-conscious aesthetic.",
+    features: ["100% Organic Cotton Canvas", "Heavy-duty double stitched handles", "Interior zip pocket & key holder", "Machine washable fabric"]
+  },
+  {
+    id: "BG-106",
+    name: "Executive Leather Laptop Bag",
+    category: "Laptop Bags",
+    price: 2799,
+    oldPrice: 3599,
+    rating: 4.9,
+    reviews: 87,
+    stock: "In Stock",
+    badge: "Premium",
+    image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80",
+    description: "Sleek professional briefcase constructed with rich oil-waxed leather. Designed for executives requiring organization, laptop protection, and elegance.",
+    features: ["Holds up to 16\" MacBook Pro", "Oil-waxed vintage leather finish", "Shock-absorbent laptop cushioning", "Detachable padded shoulder strap"]
+  },
+  {
+    id: "BG-107",
+    name: "Compact Slim Bifold Wallet",
+    category: "Wallets",
+    price: 699,
+    oldPrice: 999,
+    rating: 4.7,
+    reviews: 210,
+    stock: "In Stock",
+    badge: "RFID Safe",
+    image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80",
+    description: "Ultra-thin leather wallet equipped with advanced RFID-blocking lining to secure your credit cards against unauthorized wireless scanning.",
+    features: ["RFID Blocking Shield layer", "6 Card slots + 1 ID window", "Dual cash compartment", "Slim profile fits front pockets"]
+  },
+  {
+    id: "BG-108",
+    name: "Heritage Canvas Daypack",
+    category: "Backpacks",
+    price: 1299,
+    oldPrice: 1799,
+    rating: 4.6,
+    reviews: 53,
+    stock: "In Stock",
+    badge: "Classic",
+    image: "https://images.unsplash.com/photo-1577733966973-d680bffd2e80?auto=format&fit=crop&w=800&q=80",
+    description: "Vintage-inspired canvas backpack featuring real leather accent straps, magnetic snap closures, and side bottle holders for weekend outings.",
+    features: ["Durable waxed canvas shell", "Padded 14\" laptop sleeve", "Dual expandable side pockets", "Breathable back panel"]
+  },
+  {
+    id: "BG-109",
+    name: "Urban Messenger Crossbody",
+    category: "Sling Bags",
+    price: 1199,
+    oldPrice: 1599,
+    rating: 4.4,
+    reviews: 41,
+    stock: "In Stock",
+    badge: "Sale",
+    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=800&q=80",
+    description: "Smart city shoulder bag designed for tablet users, notebook carrying, and quick urban commuting.",
+    features: ["Fits iPads & tablets up to 11\"", "Water-repellent fabric", "Quick adjust strap lock", "Reflective safety strip"]
+  },
+  {
+    id: "BG-110",
+    name: "Multi-Compartment Tech Organizer",
+    category: "Accessories",
+    price: 899,
+    oldPrice: 1199,
+    rating: 4.8,
+    reviews: 130,
+    stock: "In Stock",
+    badge: "Essential",
+    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+    description: "Never tangle cables again! Keep power adapters, hard drives, cables, SD cards, and chargers neatly stored in this travel pouch.",
+    features: ["Double layer zippered layout", "Elastic loops for cable management", "Waterproof EVA hard shell padding", "Compact handbag handle"]
+  },
+  {
+    id: "BG-111",
+    name: "Genuine Leather Card Holder",
+    category: "Wallets",
+    price: 499,
+    oldPrice: 699,
+    rating: 4.6,
+    reviews: 88,
+    stock: "In Stock",
+    badge: "Minimalist",
+    image: "https://images.unsplash.com/photo-1606503835399-72492179860b?auto=format&fit=crop&w=800&q=80",
+    description: "Sleek card case with central slip pocket for cash bills and 4 card slots. Perfect for minimalists who prefer light carry.",
+    features: ["Genuine nappa leather", "4 credit card slots", "Central cash pocket", "Ultra lightweight 25 grams"]
+  },
+  {
+    id: "BG-112",
+    name: "Weekend Explorer Travel Duffel",
+    category: "Travel Bags",
+    price: 2299,
+    oldPrice: 2999,
+    rating: 4.8,
+    reviews: 62,
+    stock: "In Stock",
+    badge: "Durable",
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",
+    description: "Rugged flight-approved carry-on cabin bag equipped with reinforced base, heavy brass fittings, and detachable shoulder strap.",
+    features: ["Airline cabin size approved", "Reinforced bottom studs", "Water-resistant lining", "5 Pockets total"]
+  },
+  {
+    id: "BG-113",
+    name: "Vogue Quilted Shoulder Bag",
+    category: "Handbags",
+    price: 1899,
+    oldPrice: 2499,
+    rating: 4.7,
+    reviews: 94,
+    stock: "In Stock",
+    badge: "Chic",
+    image: "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80",
+    description: "Chic quilted vegan leather shoulder bag with a gold chain strap. Effortlessly transforms from casual daytime to evening glam.",
+    features: ["Premium vegan leather", "Convertible chain shoulder strap", "Turn-lock metallic closure", "Velvet touch inner lining"]
+  },
+  {
+    id: "BG-114",
+    name: "Anti-Theft Tech Backpack",
+    category: "Backpacks",
+    price: 1699,
+    oldPrice: 2199,
+    rating: 4.9,
+    reviews: 175,
+    stock: "In Stock",
+    badge: "Security",
+    image: "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=800&q=80",
+    description: "State-of-the-art security backpack featuring hidden zippers, cut-proof fabric layer, integrated USB charging port, and night reflection strips.",
+    features: ["Integrated USB charging port", "Hidden rear access zippers", "TSA combination lock ready", "Integrated rain cover included"]
+  }
+];
+
+// Helper to get product by ID
+function getProductById(id) {
+  return PRODUCTS.find(p => p.id === id);
+}
+
+// Categories list
+const CATEGORIES = [
+  "All",
+  "Handbags",
+  "Backpacks",
+  "Laptop Bags",
+  "Travel Bags",
+  "Sling Bags",
+  "Wallets",
+  "Accessories"
+];
